@@ -32,11 +32,11 @@ const Page = () => {
                     </Button>
                 </div>
 
-                <ScrollArea className="h-full w-full pr-2">
+                <ScrollArea viewportRef={null} className="h-full w-full pr-2">
                     <div className='flex flex-col gap-2'>
                         {
-                            chats.map((chat) => (
-                                <DropdownMenu>
+                            chats.map((chat, idx) => (
+                                <DropdownMenu key={idx}>
                                     <div className='p-2 px-3 rounded-md relative group flex items-center hover:bg-slate-100 '>
                                         {chat}
                                         <DropdownMenuTrigger asChild>

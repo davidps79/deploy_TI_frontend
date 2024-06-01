@@ -19,7 +19,7 @@ const PointsQuestion = ({ question }: { question: Question }) => {
             <div className='grid grid-cols-s w-full gap-4'>
                 {
                     question.options.map((option: string, idx: number) => (
-                        <div className='flex justify-between gap-2'>
+                        <div key={idx} className='flex justify-between gap-2'>
                             <span className='w-8/12'>
                                 {option}
                             </span>
