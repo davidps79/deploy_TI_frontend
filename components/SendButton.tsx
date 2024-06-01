@@ -6,13 +6,15 @@ import { Question } from '@/lib/question'
 import instance from '@/lib/axiosInstance'
 import { IconLoader } from '@tabler/icons-react'
 
-const SendButton = () => {
+const SendButton = ({}) => {
     const [loading, setLoading] = useState(false)
 
-    const { condition, round, queue, nextRound, questions, answers, addMessages }: { round: number, queue: any, nextRound: any, condition: string, addMessages: any, questions: Question[], answers: any, setAnswers: any } = useContext(ChatContext)
+    const { toSave, condition, round, queue, nextRound, questions, answers, addMessages }: { toSave: string[], round: number, queue: any, nextRound: any, condition: string, addMessages: any, questions: Question[], answers: any, setAnswers: any } = useContext(ChatContext)
 
     const submit = async (condition: string, quizAnswers: Object) => {
         const res = await instance.post("analyze", { condition, answers: quizAnswers })
+        toSave.push(res.data)
+
         if (round==0) res.data.map((diag: string) => queue.push(diag))
         else
             addMessages(res.data.map((msg: string) => { return { side: "l", content: msg } }))
