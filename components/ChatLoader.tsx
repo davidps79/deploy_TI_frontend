@@ -6,15 +6,17 @@ import { IconLoader } from '@tabler/icons-react';
 import MainGUI from './MainGUI';
 
 const ChatLoader = () => {
-  const token = localStorage.getItem('auth_token');
+  const [token, setToken] = useState<any>(null)
   const [data, setData] = useState(null)
+
   useEffect(() => {
     const fetch = async () => {
       const res = await instance.get("session/" + token)
       setData(res.data)
-    }
+      setToken(localStorage.getItem('auth_token'));
 
-    fetch()
+      fetch()
+    }
   }, [])
 
   return data ?
