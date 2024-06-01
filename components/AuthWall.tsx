@@ -1,15 +1,17 @@
 "use client"
 
-import React, { useContext, useEffect } from 'react'
+import React, { useContext, useEffect, useRef } from 'react'
 import { useRouter } from 'next/navigation'
 
 const AuthWall = ({ children }: { children: any }) => {
+    const router = useRouter()
+    const token = useRef<any>(null)
+
     useEffect(() => {
-        const token = localStorage.getItem('auth_token');
-        const router = useRouter()
-        if (!token) router.push("login")
+        token.current = localStorage.getItem('auth_token');
     }, [])
 
+    if (!token.current) router.push("login")
 
     return (
         <>
