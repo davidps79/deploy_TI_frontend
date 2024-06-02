@@ -11,12 +11,14 @@ const ChatLoader = () => {
 
   useEffect(() => {
     const fetch = async () => {
-      const res = await instance.get("session/" + token)
-      setData(res.data)
-      setToken(localStorage.getItem('auth_token'));
+      const tokenRes = localStorage.getItem('auth_token');
+      setToken(tokenRes);
+      const res = await instance.get("session/" + tokenRes)
 
-      fetch()
+      setData(res.data)
     }
+
+    fetch()
   }, [])
 
   return data ?

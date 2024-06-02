@@ -5,13 +5,11 @@ import { useRouter } from 'next/navigation'
 
 const AuthWall = ({ children }: { children: any }) => {
     const router = useRouter()
-    const token = useRef<any>(null)
 
     useEffect(() => {
-        token.current = localStorage.getItem('auth_token');
+        const token = localStorage.getItem('auth_token');
+        if (!token) router.push("login")
     }, [])
-
-    if (!token.current) router.push("login")
 
     return (
         <>
